@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>静夜思</h1>
+		<hr />
+		<p>床前明月光</p>
+		<p>疑似地上霜</p>
+		<p>举头望明月</p>
+		<p>低头思故乡</p>
+		<button id="button1">改颜色</button>
+		<button id="button2">隐藏</button>
+		<!--jQuery / Zepto.jsL(和jQuery一样高，体积小，但是效率没jQuery高)-->
+		<script src="https://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+		<script type="text/javascript">
+			window.jQuery ||
+			document.write('<script src="js/jquery.min.js"><\/script>');
+		</script>
+		<script>
+			$(function(){
+				$("#button1").on("click", function(){
+					$("p:odd").css("color", "red").css("backgroundColor");
+					$("p:even").css("color", "blus");
+				});
+				$("#button2").on("click", function(evt){
+					$("p").toggle();
+				});
+			});			
+		</script>
+	</body>
+</html>

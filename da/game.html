@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.hero{
+				position: fixed;
+				width: 100px;
+				height: 124px;
+				background-image: url(img/hero1.png);
+				border: none;
+				bottom: 0;
+				left: 70px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="hero"></div>
+		<script src="js/mylib.js"></script>
+		<script>
+			function Plane(x, y){
+				this.x = x;
+				this.y = y;
+				this.isJetting = true;
+			}
+			
+			Plane.prototype.init = function(){
+				var div = document.createElement("div");
+				div.className = "hero";
+				div.style.left = this.x + "px";
+				div.style.top = this.y + "px";
+				this.photo = div;
+				document.body.appendChild(div);
+			};
+			Plane.prototype.fly = function(){
+				var style = document.defaultView.getComputedStyle(this.photo);
+				var top = parseInt(style.top) - 2;
+				this.photo.style.top = top + 'px';
+				this.isJetting = !this.isJetting;
+				var bgImage = this.isJetting ? "url(img/hero1.png)" : "url(img/hero2.png)";
+				this.photo.style.backgroundImage = bgImage;
+			};
+			(function(){
+				var p1 = new Plane(100, 600);
+				var p2 = new Plane(300, 400);
+				var p3 = new Plane(600, 700);
+				var planes = [p1, p2, p3];
+				for (var i = 0; i < planes.length; i += 1){
+					planes[i].init();
+				}
+				setInterval(function(){
+					for (var i = 0; i < planes.length; i += 1){					
+						planes[i].fly();
+					}
+				}, 200)
+			}());
+		</script>
+	</body>
+</html>

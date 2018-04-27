@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>add</title>
+	</head>
+	<body>
+		<h1>我喜欢的水果</h1>
+		<hr />
+		<ul id="ul">
+			<li>
+				苹果
+				<a href="javascript:void(0)">删除</a>
+			</li>
+			<li>
+				香蕉
+				<a href="javascript:void(0)">删除</a>
+			</li>
+			<li>
+				葡萄
+				<a href="javascript:void(0)">删除</a>
+			</li>
+		</ul>
+		<input type="text" name="" id="te" value="" />
+		<input type="button" name="" id="btn1" value="添加" />
+		<input type="button" name="" id="btn2" value="删除" />
+		<script type="text/javascript">
+			var ul = document.getElementById("ul");
+			var te = document.getElementById("te");
+			var btn1 = document.getElementById("btn1");
+			var btn2 = document.getElementById("btn2");
+			btn1.onclick = function(){
+				if (te.value.trim().length > 0){
+//				ul.innerHTML = ul.innerHTML + "<li>" + te.value + "</li>";
+				var li = document.createElement("li");
+				var a = document.createElement("a");
+				a.textContent = " " + "删除";
+				a.href = "javascript:void(0)";
+				var tex = document.createTextNode(te.value);
+				li.appendChild(tex);
+				li.appendChild(a);
+				ul.appendChild(li);
+				li.onclick = remove;
+				}
+			};
+			btn2.onclick = function(){
+				var x = document.getElementById("ul").childNodes;
+//				ul.removeChild(ul.lastChild);
+				for(var i=0; i<x.length; i+=1 ){
+					if(x[i].textContent == te.value){
+						ul.removeChild(x[i]);
+						i -= 1;
+					}
+				}
+			}
+		</script>
+		<script type="text/javascript">
+			var aList = document.querySelectorAll("#ul li a");
+			for (i=0; i<aList.length; i+=1){
+				aList[i].onclick = remove;
+			}
+			function remove(evt){
+				evt = evt || window.event; //短路解决兼容问题
+				var li = evt.target.parentNode;
+				li.parentNode.removeChild(li);
+			}
+		</script>
+		<script type="text/javascript" src="js/jquery-3.3.1.js">
+			$()
+		</script>
+	</body>
+</html>

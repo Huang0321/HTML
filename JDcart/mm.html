@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="photos"></div>
+		<button id="load">加载</button>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$.ajax({
+				type:"get",
+				dataType:"json",
+//				data:{},给服务器数据
+				url:"http://api.tianapi.com/meinv/?key=40c13e03b1f88fc3fe9d522d7240886a&num=20",
+				async:true,
+				success: function(obj){
+					mmArray = obj.newslist;
+					for (var i = 0; i < mmArray.length; i += 1 ){
+						$("#photos").append($("<img>").attr("src", mmArray[i].picUrl).width("300"));
+					};
+				}
+			});
+		});
+	</script>
+	</body>
+</html>

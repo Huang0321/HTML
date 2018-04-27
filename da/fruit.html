@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul li a{	
+				text-decoration: none;	
+				display: inline-block;
+			}
+			ul li{
+				width: 200px;
+				margin: 10px;
+				text-align: right;
+				list-style-type: none;
+			}
+			button {
+				display: inline-block;
+				margin-top: 20px;
+			}
+			input{
+				display: inline-block;
+				margin-left: 80px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>My favorite fruits</h1>
+		<hr />
+		<ul>
+			<li>apple <a href="javascript:void(0);">delete</a></li>
+			<li>banana <a href="javascript:void(0);">delete</a></li>
+			<li>watermelon <a href="javascript:void(0);">delete</a></li>
+			<li>grape <a href="javascript:void(0);">delete</a></li>
+			<li>pineapple <a href="javascript:void(0);">delete</a></li>
+		</ul>
+		<input type="text" name="" id="" value="" />
+		<button>add fruit</button>
+		<script src="https://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+		<script type="text/javascript">
+			window.jQuery ||
+			document.write('<script src="js/jquery.min.js"><\/script>');
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("button").on("click", function(){
+					var content = $("input").val();
+					$("ul").append($("<li>").text(content + " ").append($("<a>").text(" delete").attr("href", "javascript:void(0);").on("click", remove)));
+				})
+				$('a').on("click", remove);
+				function remove(evt){
+					$(evt.target).parent().remove();
+				};
+			})
+		</script>
+		</ul>
+	</body>
+</html>

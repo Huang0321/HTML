@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Y.Win</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<div id="header">
+			<p>Y.Win</p>
+		</div>
+		<div id="main">
+			<span id="txt">
+				<button id="btn1">源代码：</button>
+				<button id="btn2" onclick="getText()">点击运行：</button>
+				<textarea name="text" placeholder="请输入HTML代码:" id="text" cols="50" rows="30"></textarea>
+			</span>
+			<span id="frame">
+				<button id="btn3">运行结果：</button>
+				<iframe id='iframe' frameborder="1"></iframe>
+			</span>
+			<script type="text/javascript">
+				function getText(){
+					var f = document.getElementById("iframe");
+					var t = document.getElementById("text");
+					f.srcdoc = t.value;	
+				}
+			</script>
+		</div>
+	</body>
+</html>

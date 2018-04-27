@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#login label,#login input{
+				display: inline-block;
+				vertical-align: middle;
+			}
+			#login div input[type="button"]{
+				font: 10px/10px 宋体;
+				display: inline-block;
+				margin-left: 5px;
+			}
+			label{
+				width: 150px;
+				text-align: right;
+				margin: 20px 5px;
+			}
+			#login input[type="submit"]{
+				margin-top: 30px;
+				margin-left: 180px;
+				display: inline-block;
+				width: 120px;
+				height: 30px;
+				color: white;
+				background-color: darkred;
+				font: 22px/22px 微软雅黑;
+				border: none;
+				outline: none;
+			}
+			.hint{
+				display: inline-block;
+				width: 320px;
+				font-size: 14px;
+			}
+			.correct{
+				color: green;
+			}
+			.incorrect{
+				color:red;
+			}
+			div:last-child{
+				margin: 20px 135px;
+			}
+			a {
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="">
+			<form id="login" action="" method="post">
+				<div id=""><label for="username">用户名：</label><input type="text" name="" id="username" value="" /><span class="hint" id="uidhint"></span></div>
+				<div id=""><label for="password">密码：</label><input type="password" name="" id="password" value="" /><span class="hint" id="pwdhint"></span></div>
+				<div id=""><label for="repassword">确认密码：</label><input type="password" name="" id="repassword" value="" /><span class="hint" id="repwdhint"></span></div>
+				<div id=""><label for="tel">手机号：</label><input type="text" name="" id="tel" value="" /><span class="hint" id="telhint"></span></div>
+				<div id=""><label for="getSafeCode">验证码：</label><input type="text" name="" id="getSafeCode" value="" /><input type="button" name="" id="" value="获取验证码" /><span class="hint"></span></div>
+				<input type="submit" name="" id="subm" value="立即开通" />
+				<div><input type="checkbox" name="agree" id="agree" value="" /><span id="">我同意</span><a href="">《XYZ中的协议》</a></div>
+			</form>
+			
+		</div>
+		<script src="js/mylib.js"></script>	
+		<script>	
+			//使用正则表达式的字面量语法
+			(function(){
+				var uid = $("username");
+				var pwd = $("password");
+				var repwd = $("repassword");
+				var tel = $("tel");
+				function checkUsername(){
+					var uidhint = $("uidhint");
+					var username = $("username").value.trim();
+					if (/^\w{6,20}$/.test(username)){
+						uidhint.textContent = "√";
+						uidhint.className = "hint correct";
+						return true;
+					}else{
+						uidhint.textContent = "用户名由字母数字下划线构成且长度为6~20个字符";
+						uidhint.className = "hint incorrect";	
+					}
+				};
+				handleEvent(uid, "blur", checkUsername);		
+				function checkPassword(){
+					var pwdhint = $("pwdhint");
+					if (/^.{8,20}$/.test(pwd.value)){
+						pwdhint.textContent = "√";
+						pwdhint.className = "hint correct";
+						return true;
+					}else{
+						pwdhint.textContent = "密码长度为8~20个字符"
+						pwdhint.className = "hint incorrect";
+						return false;
+					}	
+				};
+				handleEvent(pwd, "blur", checkPassword);				
+				function checkRepassword(){
+					var repwdhint = $("repwdhint");
+					if (repwd.value == pwd.value){
+						return true;
+					}else{
+						repwdhint.textContent = "两次输入的密码不一致";
+						repwdhint.className = "hint incorrect";	
+						return false;
+					}
+				};
+				handleEvent(repwd, "blur", checkRepassword);
+				function checkeTel(){
+					var telhint = $("telhint");
+					if (/^1[0-9]{10}$/.test(tel.value)){
+						telhint.textContent = "√";
+						telhint.className = "hint correct";
+						return true;
+					}else{
+						telhint.textContent = "请输入正确的手机号码"
+						telhint.className = "hint incorrect";	
+						return false;
+					}
+				}
+				handleEvent(tel, "blur", checkeTel);
+				
+				var form = $("login") || document.forms[0];
+				handleEvent(form, "submit", function(evt){
+					evt = evt || window.event;
+					evt.preventDefault();
+					if (!$("agree").checked){
+						return
+					}else{
+						if (checkUsername()&checkPassword()&checkRepassword()&checkeTel()){
+							form.submit();
+						}
+					}
+				});
+			}())
+			
+		</script>
+	</body>
+</html>

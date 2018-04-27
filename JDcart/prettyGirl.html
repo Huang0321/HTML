@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div></div>
+		<button id="btn">点此下载</button>
+		<script>
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "http://api.tianapi.com/meinv/?key=40c13e03b1f88fc3fe9d522d7240886a&num=10", true);
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState == 4 && xhr.status == 200){
+					var obj = JSON.parse(xhr.responseText);
+				}
+			}
+		</script>
+	</body>
+</html>

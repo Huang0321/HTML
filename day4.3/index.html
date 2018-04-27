@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			input[type="button"]{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Hello, World</h1>
+		<input type="button" name="" id="button1" value="按钮1可点" />
+		<input type="button" name="" id="button2" value="按钮2不可点" disabled />
+		<script src="js/mylib.js"></script>
+		<script type="text/javascript">
+			(function(){
+				var btn1 = $("button1");
+				var btn2 = $("button2");
+				handleEvent(btn1, "click", function(evt){
+					evt = evt || window.event;
+					evt.target.setAttribute("value", "按钮1(不可点)");
+					evt.target.setAttribute("disabled", "");
+					btn2.setAttribute("value", "按钮2(可点)");
+					btn2.removeAttribute("disabled");
+				});
+				handleEvent(btn2, "click", function(evt){
+					var a = evt.target;
+					a.setAttribute("value", "按钮2(不可点)");
+					a.setAttribute("disabled", "");
+					btn1.removeAttribute("disabled");
+					btn1.setAttribute("value", "按钮1(可点)");
+				});
+			}());
+		</script>
+	</body>
+</html>

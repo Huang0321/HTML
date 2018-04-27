@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Homework</title>
+	</head>
+	<body>
+		<h1>我喜欢的水果</h1>
+		<hr />
+		<ul id="fruitList">
+			<li>苹果 <a href="javascript:void(0)">删除</a></li>
+			<li>香蕉 <a href="javascript:void(0)">删除</a></li>
+			<li>西瓜 <a href="javascript:void(0)">删除</a></li>
+		</ul>
+		<input id="tex" type="text" />
+		<button id="btn">增加</button>
+		<script type="text/javascript">
+			var liList = document.querySelectorAll("#fruitList li");
+			console.log(liList);
+			var btn = document.getElementById("btn");
+			console.log(btn);
+			var tex = document.getElementById("tex");
+			console.log(tex);
+			btn.addEventListener('click', function(){
+				var ul = document.getElementById("fruitList");
+				var li = document.createElement("li");
+				var a = document.createElement("a");
+				li.textContent = tex.value;
+				console.log(tex.value);
+				console.log(li.textContent + "hhhh");
+				a.textContent = " " + "删除";
+				console.log(a);
+				a.href = "javascript:void(0)";
+				li.appendChild(a);
+				console.log(li);
+				a.addEventListener("click", remove)
+				ul.appendChild(li);
+			})
+			function remove(evt){
+				var x = evt.target.parentNode;
+				x.parentNode.removeChild(x);
+			}	
+		</script>			
+	</body>
+</html>

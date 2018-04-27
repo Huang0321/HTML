@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="photos">
+			
+		</div>
+		<button id='load'>jiazai</button>
+		<script type="text/javascript">
+			(function(){
+			 var btu=	document.getElementById('load')
+			 btu.addEventListener('click',function(){
+			 	var xhr=new XMLHttpRequest();
+			 	xhr.open('GET',
+			 	'http://api.tianapi.com/meinv/?key=85b14f56b374eb2129e9eac54b1a00c1&num=10',true);
+			 	xhr.onreadystatechange=function(){
+			 		if(xhr.readyState==4){
+			 			if(xhr.status==200){
+			 				
+			 				var data=JSON.parse(xhr.responseText);
+			 				
+			 				var my=data.newslist;
+			 			
+			 				var div= document.getElementById('photos')
+			 				for(i=0;i<my.length;i++){
+			 					var picUrl= my[i].picUrl;
+			 					var img=document.createElement('img');
+			 					img.src=picUrl;
+			 					img.width='360';
+			 					div.appendChild(img);
+			 				}
+			 				
+			 			}
+			 		}
+			 	};
+			 	xhr.send();
+			 })
+			}());
+		</script>
+	</body>
+</html>

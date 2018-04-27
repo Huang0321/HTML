@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div {
+				margin: 50px;
+				width: 100px;
+				height: 100px;
+				position: relative;
+				left: 100px;
+				right: 200px;
+				background-color: #FF00FF;
+			}
+			#div1{
+				background-color: #008000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			
+		</div>
+		<div id="div2">
+			
+		</div>
+		<script src="js/mylib.js"></script>
+		<script type="text/javascript">
+			(function(){
+				var div1 = $("div1");
+				var div2 = $("div2");
+				handleEvent(div1, "mousedown", function(evt){
+					evt = evt || window.event;
+					div1.clickX = evt.clientX;
+					div1.clickY = evt.clientY;
+					div1.mouseFlag = true;
+//					evt.preventDefault()阻止默认行为
+//					evt.stopPropagation()阻止事件的传播，如果是冒泡方式，阻止向上传播，如果是捕获，不在向下传播；
+//					IE里面是cancelBubble,默认是冒泡的方式。
+//					需要处理浏览器兼容问题：
+//					if (evt.stopPropagation){
+//                  	evt.stopPropagation()
+//                  }else{
+//                  	evt.cancelBubble= true;
+//                  }
+// 事件冒泡(事件顺序从里到外)和事件捕获(事件顺序从外到里 ) 默认是事件冒泡顺序 如果想设置事件捕获
+// addEventListener 里面的第三个参数表示事件捕获方式，如果设置为true，表示事件捕获，如果设置为false，表示事件冒泡，默认为false冒泡
+// 一般用冒泡的处理方式
+					//通过元素的style属性，我们只能修改元素的样式，并不能获取元素的样式，
+					// 如果我们想要获取元素的当前样式，那么可以通过documen对象的defaulView属性的
+					// getCoputedStyle(elem)方法获得<elem>元素的当前样式、
+					// IE里面有一个currentstyle样式
+					var currentStyle = getCurrentStyle(div1);
+					div1.originLeft = parseInt(currentStyle.left);
+					console.log(currentStyle.left);
+					console.log(div1.originLeft);
+					div1.originTop = parseInt(currentStyle.top);
+					console.log(currentStyle.top);
+					console.log(div1.originTop);
+				});
+				handleEvent(div1, "mousemove", function(evt){
+					if (div1.mouseFlag)	{
+						evt = evt || window.event;
+						var dx = evt.clientX - div1.clickX;
+						console.log("x" + dx);
+						var dy = evt.clientY - div1.clickY;
+						console.log("y" + dy);
+						div1.style.left = div1.originLeft + dx +"px";
+						div1.style.top = div1.originTop + dy + "px";
+					}
+				});
+				handleEvent(window, "mouseup", function(){
+					div1.mouseFlag = false;
+				})
+			}());
+			
+		</script>
+	</body>
+</html>

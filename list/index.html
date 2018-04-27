@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>List</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.menu {
+				list-style: none;
+			}
+			.menu>li{
+				width: 120px;
+				height: 35px;
+				background-color:  #8FBC8F;
+				color: white;
+				text-align: center;
+				line-height: 35px;
+				border-bottom: 1px solid lightgray;
+				overflow: hidden;
+			}
+			.menu>li:hover{
+				height: auto;
+				overflow: visible;
+
+			}
+			.menu>li ul{
+				float: left;
+			}
+			.menu li ul  li {
+				width: 120px;
+				height: 35px;
+				background-color: lightsteelblue;
+				color: white;
+				line-height: 35px;
+				text-align: center;
+				border-bottom: 1px solid lightgray;
+			}
+			#adv {
+				width: 200px;
+				height: 200px;
+				background-color: green;
+				position: fixed;
+				top: 100px;
+				right: 100px;
+				z-index: -1;
+			}
+			#btn{
+				border: none;
+				color: white;
+				position: fixed;
+				top: 100px;
+				right: 100px;
+				font-size: 30px;
+				background-color: green;
+				width: 40px;
+			}
+			#welcome {
+				height: 40px;
+				line-height: 40px;
+				font-size: 30px;
+				background-color: paleturquoise;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 id="welcome">欢迎到成都千峰Python1801班！…………</h1>
+		<button id="btn">&times;</button>
+		<div id="adv">
+			
+		</div>
+		<ul class="menu">
+			<li>Menu1
+				<ul>
+					<li>Menu1</li>
+					<li>Menu2</li>
+					<li>Menu3</li>
+					<li>Menu4</li>
+					<li>Menu5</li>
+				</ul>
+			</li>
+			<li>Menu2</li>
+			<li>Menu3</li>
+			<li>Menu4</li>
+			<li>Menu5</li>
+		</ul>
+		<script type="text/javascript">
+			var adv = document.getElementById("adv");
+			var btn = document.getElementById("btn");
+			var count = 0;
+			btn.onclick = function(){
+				if (count < 2){
+					open("http://baidu.com")
+				}
+				else{
+					adv.style.display = "none";
+					btn.style.display = "none";
+			}
+				count += 1;
+			};
+			var h1 = document.getElementById("welcome");
+			window.setInterval(function(){
+				h1.textContent = h1.textContent.substring(1) + h1.textContent.charAt(0);
+			}, 500);
+		</script>
+	</body>
+</html>
